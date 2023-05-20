@@ -240,7 +240,7 @@ def main():
         user_agents = None
     print("getting dummy data...")
     all_data = open(file_name, 'r', encoding="utf8")
-    all_data = f.read().split("\n")
+    all_data = all_data.read().split("\n")
 
 
     print("starting clone...")
