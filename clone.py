@@ -83,7 +83,7 @@ def get_passwords(password):
     return passwords
     
     
-def login(username, password, user_agents, proxy = None):
+def login(username, password, user_agents=None, proxy = None):
     b = "350685531728%7C62f8ce9f74b12f84c123cc23437a4a32"
     flag = False
     USER_AGENT = random.choice(user_agents)
@@ -150,7 +150,7 @@ def login(username, password, user_agents, proxy = None):
         #     f.write(all_data)
 
 
-def login_with_request(username, password,user_agents, proxy= None):
+def login_with_request(username, password,user_agents=None, proxy= None):
     flag = False
     
     try:
@@ -234,7 +234,10 @@ def main():
         
     threads = int(input("number of threads: "))
     print("getting user agents...")
-    user_agents = get_user_agents()
+    try:
+        user_agents = get_user_agents()
+    except:
+        user_agents = None
     print("getting dummy data...")
     with open(file_name, 'r', encoding="utf8") as f:
         all_data = f.read().split("\n")
