@@ -249,25 +249,27 @@ def main():
         print("Login with proxy..")
         cnt = 0
         for data in all_data:
-            print(f"data: {data}")
-            id,passw = data.split("|")
-            
-            if method == 1:
-                if prox == 2:
-                    thread.submit(login, id,passw, user_agents, proxies[cnt])
+            # print(f"data: {data}")
+            data = data.split("|")
+            if len(data)>=2:
+                id,passw = data
+                
+                if method == 1:
+                    if prox == 2:
+                        thread.submit(login, id,passw, user_agents, proxies[cnt])
+                    else:
+                        thread.submit(login, id,passw, user_agents)
                 else:
-                    thread.submit(login, id,passw, user_agents)
-            else:
-                if prox == 2:
-                    thread.submit(login_with_request, id,passw, user_agents, proxies[cnt])
-                else:
-                    thread.submit(login_with_request, id,passw, user_agents)
-            
-            cnt += 1
-            if len(proxies)-1 == cnt:
-                cnt = 0
-            
-            # login(id,passw)
+                    if prox == 2:
+                        thread.submit(login_with_request, id,passw, user_agents, proxies[cnt])
+                    else:
+                        thread.submit(login_with_request, id,passw, user_agents)
+                
+                cnt += 1
+                if len(proxies)-1 == cnt:
+                    cnt = 0
+                
+                # login(id,passw)
 
 
 
