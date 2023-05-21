@@ -244,32 +244,32 @@ def main():
 
 
     print("starting clone...")
-    with ThreadPoolExecutor(max_workers=threads) as thread:
-        print("clone started")
-        print("Login with proxy..")
-        cnt = 0
-        for data in all_data:
-            # print(f"data: {data}")
-            data = data.split("|")
-            if len(data)>=2:
-                id,passw = data
-                
-                if method == 1:
-                    if prox == 2:
-                        thread.submit(login, id,passw, user_agents, proxies[cnt])
-                    else:
-                        thread.submit(login, id,passw, user_agents)
+    print("clone started")
+    print("Login with proxy..")
+    cnt = 0
+    for data in all_data:
+        # print(f"data: {data}")
+        data = data.split("|")
+        if len(data)>=2:
+            id,passw = data
+            pool = ThreadPoolExecutor(max_workers=threads)
+            
+            if method == 1:
+                if prox == 2:
+                    pool.submit(login, id,passw, user_agents, proxies[cnt])
                 else:
-                    if prox == 2:
-                        thread.submit(login_with_request, id,passw, user_agents, proxies[cnt])
-                    else:
-                        thread.submit(login_with_request, id,passw, user_agents)
-                
-                cnt += 1
-                if len(proxies)-1 == cnt:
-                    cnt = 0
-                
-                # login(id,passw)
+                    pool.submit(login, id,passw, user_agents)
+            else:
+                if prox == 2:
+                    pool.submit(login_with_request, id,passw, user_agents, proxies[cnt])
+                else:
+                    pool.submit(login_with_request, id,passw, user_agents)
+            
+            cnt += 1
+            if len(proxies)-1 == cnt:
+                cnt = 0
+            
+            # login(id,passw)
 
 
 
